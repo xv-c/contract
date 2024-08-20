@@ -1,0 +1,60 @@
+openapi: "3.0.0"
+
+info:
+  title: Contract API
+  version: 0.0.1
+tags:
+  - name: Example
+
+paths:
+  /example/{id}:
+    get:
+      operationId: example
+      summary: Пример запроса
+      tags:
+        - Example
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            description: Идентификатор
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Пример ответа
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        400:
+          description: Ошибка при обработке запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Error:
+      description: Ошибки при обработке опроса
+      type: object
+      properties:
+        error:
+          description: Формулировка ошибки
+          type: string
+        time:
+          type: string
+          format: date-time
+
+    Example:
+      description: Запрос на создание опроса
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          description: Идентификатор
+          type: integer
+          format: int64
